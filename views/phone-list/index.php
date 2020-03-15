@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PhoneListSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -18,27 +18,24 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Phone List', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php //echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php Pjax::begin(); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'user_id' => [
-                'label' => 'User',
-                'value' => function ($data) {
-                    return $data->user->name;
-                }
-            ],
-            'phone',
-            'phone_type',
-            [
-                'class' => 'yii\grid\ActionColumn',
 
-            ],
+            'id',
+            'user_id',
+            'phone',
+            'description',
+
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
+    <?php Pjax::end(); ?>
 
 </div>

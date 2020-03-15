@@ -16,8 +16,11 @@ class m200312_044459_create_phone_list_table extends Migration
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(),
             'phone' => $this->bigInteger(),
-            'phone_type' => $this->integer()
+            'description' => $this->string()
         ]);
+
+        $this->addForeignKey('fk-phone_list-user_id', 'phone_list', 'user_id', 'user', 'id', 'CASCADE');
+
     }
 
     /**
@@ -25,6 +28,7 @@ class m200312_044459_create_phone_list_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropForeignKey('fk-phone_list-user_id', 'phone_list');
         $this->dropTable('{{%phone_list}}');
     }
 }

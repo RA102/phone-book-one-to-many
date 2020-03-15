@@ -4,6 +4,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\PhoneList */
+/* @var $userModel app\models\User */
 
 $this->title = 'Create Phone List';
 $this->params['breadcrumbs'][] = ['label' => 'Phone Lists', 'url' => ['index']];
@@ -15,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'userModel' => $userModel,
     ]) ?>
 
 </div>

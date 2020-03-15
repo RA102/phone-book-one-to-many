@@ -2,11 +2,10 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\User;
+use Yii;
 use app\models\PhoneList;
 use app\models\PhoneListSearch;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -67,24 +66,15 @@ class PhoneListController extends Controller
     public function actionCreate()
     {
         $model = new PhoneList();
+        $userModel = new User();
 
-        if ($model->load(Yii::$app->request->post())) {
-            $post = Yii::$app->request->post('PhoneList');
-            $name = ArrayHelper::getValue($post, 'user_id');
-            $user = new User();
-            $user->name = $name;
-            $user->save();
-            $model->user_id = $user->id;
-            $model->phone = ArrayHelper::getValue($post, 'phone');
-            $model->phone_type = ArrayHelper::getValue($post, 'phone_type');
-            $model->save();
-
-            //return $this->redirect(['view', 'id' => $model->id]);
-            return $this->redirect('index');
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'userModel' => $userModel
         ]);
     }
 

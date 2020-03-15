@@ -17,7 +17,8 @@ class PhoneListSearch extends PhoneList
     public function rules()
     {
         return [
-            [['id', 'user_id', 'phone', 'phone_type'], 'integer'],
+            [['id', 'user_id', 'phone'], 'integer'],
+            [['description'], 'safe'],
         ];
     }
 
@@ -60,8 +61,9 @@ class PhoneListSearch extends PhoneList
             'id' => $this->id,
             'user_id' => $this->user_id,
             'phone' => $this->phone,
-            'phone_type' => $this->phone_type,
         ]);
+
+        $query->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

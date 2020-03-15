@@ -8,9 +8,11 @@ use Yii;
  * This is the model class for table "phone_list".
  *
  * @property int $id
- * @property int|null $user_id
- * @property int|null $phone
- * @property int|null $phone_type
+ * @property int $user_id
+ * @property int $phone
+ * @property string $description
+ *
+ * @property User $user
  */
 class PhoneList extends \yii\db\ActiveRecord
 {
@@ -28,10 +30,9 @@ class PhoneList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-//            ['user_id', 'safe' ],
-//            ['phone_type', 'safe' ],
-//            ['phone', 'integer' ],
-            [['user_id', 'phone', 'phone_type'], 'required']
+            [['user_id', 'phone'], 'integer'],
+            [['description'], 'string', 'max' => 255],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -44,24 +45,15 @@ class PhoneList extends \yii\db\ActiveRecord
             'id' => 'ID',
             'user_id' => 'User ID',
             'phone' => 'Phone',
-            'phone_type' => 'Phone Type',
+            'description' => 'Description',
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getUser()
     {
-        return $this->hasOne(User::className(),['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
-
-    public function getPhoneType()
-    {
-        return $this->hasOne(PhoneType::className(),['id' => 'phone_type']);
-    }
-
-    public function getAllPhoneUser()
-    {
-
-    }
-
-
 }

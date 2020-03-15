@@ -8,7 +8,9 @@ use Yii;
  * This is the model class for table "user".
  *
  * @property int $id
- * @property string|null $name
+ * @property string $name
+ *
+ * @property PhoneList[] $phoneLists
  */
 class User extends \yii\db\ActiveRecord
 {
@@ -41,9 +43,11 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getPhone()
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPhoneLists()
     {
-        return $this->hasMany()
+        return $this->hasMany(PhoneList::className(), ['user_id' => 'id']);
     }
-
 }
