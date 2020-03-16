@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\PhoneList */
+/* @var $model app\models\Phone */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Phone Lists', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Phones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="phone-list-view">
+<div class="phone-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -30,8 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'user_id',
-            'phone',
+            'phone_number',
             'phone_type',
         ],
     ]) ?>

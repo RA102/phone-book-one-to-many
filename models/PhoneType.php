@@ -8,7 +8,9 @@ use Yii;
  * This is the model class for table "phone_type".
  *
  * @property int $id
- * @property string|null $type
+ * @property string $type
+ *
+ * @property Phone[] $phones
  */
 class PhoneType extends \yii\db\ActiveRecord
 {
@@ -39,5 +41,13 @@ class PhoneType extends \yii\db\ActiveRecord
             'id' => 'ID',
             'type' => 'Type',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPhones()
+    {
+        return $this->hasMany(Phone::className(), ['phone_type' => 'id']);
     }
 }

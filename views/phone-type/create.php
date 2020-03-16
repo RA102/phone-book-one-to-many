@@ -3,13 +3,13 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\PhoneList */
+/* @var $model app\models\PhoneType */
 
-$this->title = 'Create Phone List';
-$this->params['breadcrumbs'][] = ['label' => 'Phone Lists', 'url' => ['index']];
+$this->title = 'Create Phone Type';
+$this->params['breadcrumbs'][] = ['label' => 'Phone Types', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="phone-list-create">
+<div class="phone-type-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
